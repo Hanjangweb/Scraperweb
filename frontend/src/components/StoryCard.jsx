@@ -4,7 +4,7 @@ import { storiesAPI } from '../utils/api';
 import { useAuth } from '../context/authContext';
 
 export default function StoryCard({ story, onBookmarkChange, onAuthRequired }) {
-    const { isAuthenticated, user } = useAuth();
+    const { isAuthenticated, user, refreshBookmarkCount } = useAuth();
     const [isBookmarked, setIsBookmarked] = useState(
         isAuthenticated && user?.id && story.bookmarkedBy?.some(id => 
             (typeof id === 'string' ? id : id._id) === user.id
@@ -36,6 +36,8 @@ export default function StoryCard({ story, onBookmarkChange, onAuthRequired }) {
             const response = await storiesAPI.toggleBookmark(story._id);
             setIsBookmarked(response.data.bookmarked);
             onBookmarkChange?.(story._id, response.data.bookmarked);
+            // Update the global bookmark count
+            refreshBookmarkCount();
         } catch (error) {
             console.error('Bookmark error:', error);
         } finally {

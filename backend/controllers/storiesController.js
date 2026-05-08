@@ -85,6 +85,12 @@ exports.getUserBookmarks = async (req, res) => {
   });
 };
 
+exports.getBookmarkCount = async (req, res) => {
+  const userId = req.userId;
+  const count = await Story.countDocuments({ bookmarkedBy: userId });
+  res.status(200).json({ success: true, count });
+};
+
 exports.scrapeStories = async (req, res) => {
   try {
     const stories = await scrapeHackerNews();

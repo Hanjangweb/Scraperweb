@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { authAPI } from '../utils/api';
+import { authAPI, storiesAPI } from '../utils/api';
 
 // 1. Create the Context
 const AuthContext = createContext();
@@ -8,6 +8,26 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
   const [loading, setLoading] = useState(false);
+  const [bookmarkCount, setBookmarkCount] = useState(0);
+
+  const refreshBookmarkCount = async () => {
+    if (isAuthenticated) {
+      try {
+        const response = await storiesAPI.getBookmarkCount();
+        setBookmarkCount(response.data.count);
+      } catch (error) {
+        console.error('Failed to fetch bookmark count:', error);
+      }
+    } else {
+      setBookmarkCount(0);
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      refreshBookmarkCount();
+    }
+  }, [isAuthenticated]);
 
   // Login function updates state after successful API call
   const login = (user, token) => {
@@ -20,10 +40,11 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     setUser(null);
     setIsAuthenticated(false);
+    setBookmarkCount(0);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, isAuthenticated, loading, bookmarkCount, refreshBookmarkCount }}>
       {children}
     </AuthContext.Provider>
   );

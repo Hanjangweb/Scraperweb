@@ -32,6 +32,7 @@ export const storiesAPI = {
   toggleBookmark: (id) => api.post(`/stories/${id}/bookmark`),
   getBookmarks: (page = 1, limit = 10) =>
     api.get(`/stories/user/bookmarks?page=${page}&limit=${limit}`),
+  getBookmarkCount: () => api.get('/stories/user/bookmarks/count'),
   scrapeStories: () => api.post('/stories/scrape'),
 };
 

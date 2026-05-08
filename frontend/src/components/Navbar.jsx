@@ -4,7 +4,7 @@ import { Menu, X, LogOut, Bookmark, Home, User } from 'lucide-react';
 import { useAuth } from '../context/authContext';
 
 export default function Navbar() {
-    const { user, logout, isAuthenticated } = useAuth();
+    const { user, logout, isAuthenticated, bookmarkCount } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -45,7 +45,14 @@ export default function Navbar() {
                         <div className="hidden md:flex items-center gap-6">
                             <Link to="/" className={`nav-link ${isActive('/') ? 'text-orange-600' : ''}`}>Stories</Link>
                             {isAuthenticated && (
-                                <Link to="/bookmarks" className={`nav-link ${isActive('/bookmarks') ? 'text-orange-600' : ''}`}>Bookmarks</Link>
+                                <Link to="/bookmarks" className={`nav-link flex items-center gap-2 ${isActive('/bookmarks') ? 'text-orange-600' : ''}`}>
+                                    Bookmarks
+                                    {bookmarkCount > 0 && (
+                                        <span className="flex items-center justify-center w-5 h-5 text-[10px] font-bold text-white bg-orange-600 rounded-full shadow-sm animate-in zoom-in duration-300">
+                                            {bookmarkCount > 99 ? '99+' : bookmarkCount}
+                                        </span>
+                                    )}
+                                </Link>
                             )}
 
                             <div className="h-6 w-[1px] bg-gray-200 dark:bg-gray-700 mx-2" />
@@ -129,13 +136,22 @@ export default function Navbar() {
                         <Link
                             to="/bookmarks"
                             onClick={() => setIsDrawerOpen(false)}
-                            className={`flex items-center gap-4 p-4 rounded-2xl font-bold transition-all ${isActive('/bookmarks')
+                            className={`flex items-center justify-between p-4 rounded-2xl font-bold transition-all ${isActive('/bookmarks')
                                     ? 'bg-orange-600 text-white shadow-lg shadow-orange-200'
                                     : 'text-gray-500 dark:text-gray-400 hover:bg-orange-50 dark:hover:bg-gray-800'
                                 }`}
                         >
-                            <Bookmark size={22} />
-                            Saved Bookmarks
+                            <div className="flex items-center gap-4">
+                                <Bookmark size={22} />
+                                Saved Bookmarks
+                            </div>
+                            {bookmarkCount > 0 && (
+                                <span className={`flex items-center justify-center min-w-[24px] h-6 px-1.5 text-xs font-black rounded-full ${
+                                    isActive('/bookmarks') ? 'bg-white text-orange-600' : 'bg-orange-600 text-white'
+                                }`}>
+                                    {bookmarkCount}
+                                </span>
+                            )}
                         </Link>
                     )}
                 </div>
