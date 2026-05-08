@@ -9,11 +9,10 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
   const [loading, setLoading] = useState(false);
 
-  // Example Login function
-  const login = async (credentials) => {
-    const res = await authAPI.login(credentials);
-    localStorage.setItem('token', res.data.token);
-    setUser(res.data.user);
+  // Login function updates state after successful API call
+  const login = (user, token) => {
+    localStorage.setItem('token', token);
+    setUser(user);
     setIsAuthenticated(true);
   };
 

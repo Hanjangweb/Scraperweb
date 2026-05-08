@@ -105,10 +105,10 @@ const scrapeHackerNews = async () => {
       );
     }
 
-    console.log(`✅ Successfully scraped and saved ${stories.length} stories`);
+    console.log(` Successfully scraped and saved ${stories.length} stories`);
     return stories;
   } catch (error) {
-    console.error('❌ Scraping error:', error.message);
+    console.error(' Scraping error:', error.message);
     throw error;
   }
 };
