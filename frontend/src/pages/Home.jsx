@@ -22,7 +22,6 @@ export default function Home() {
 
   useEffect(() => {
     fetchStories();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [page]);
 
   const fetchStories = async () => {
@@ -80,7 +79,7 @@ export default function Home() {
           <button
             onClick={handleRefresh}
             disabled={refreshing}
-            className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 text-orange-600 dark:text-orange-400 font-bold rounded-2xl shadow-sm border border-orange-100 dark:border-gray-700 hover:bg-orange-50 transition-all active:scale-95 disabled:opacity-50"
+            className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 text-orange-600 dark:text-orange-400 font-bold rounded-2xl shadow-sm border border-orange-100 dark:border-gray-700 hover:bg-orange-50 transition-all active:scale-95 disabled:opacity-50 cursor-pointer"
           >
             <RefreshCw size={18} className={refreshing ? 'animate-spin' : ''} />
             {refreshing ? 'Refreshing...' : 'Refresh Feed'}
@@ -105,7 +104,7 @@ export default function Home() {
             <button
               onClick={() => setPage(p => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="p-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm hover:bg-orange-50 dark:hover:bg-gray-700 transition-all disabled:opacity-30 disabled:hover:bg-white"
+              className="p-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm hover:bg-orange-50 dark:hover:bg-gray-700 transition-all disabled:opacity-30 disabled:hover:bg-white cursor-pointer"
             >
               <ChevronLeft size={24} />
             </button>
@@ -123,7 +122,7 @@ export default function Home() {
             <button
               onClick={() => setPage(p => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
-              className="p-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm hover:bg-orange-50 dark:hover:bg-gray-700 transition-all disabled:opacity-30 disabled:hover:bg-white"
+              className="p-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm hover:bg-orange-50 dark:hover:bg-gray-700 transition-all disabled:opacity-30 disabled:hover:bg-white cursor-pointer"
             >
               <ChevronRight size={24} />
             </button>

@@ -74,7 +74,7 @@ export default function Bookmarks() {
             <button
               onClick={() => setPage(page - 1)}
               disabled={page === 1}
-              className="btn btn-outline disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn btn-outline disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               Previous
             </button>
@@ -84,7 +84,7 @@ export default function Bookmarks() {
             <button
               onClick={() => setPage(page + 1)}
               disabled={page === totalPages}
-              className="btn btn-outline disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn btn-outline disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               Next
             </button>
