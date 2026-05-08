@@ -10,6 +10,16 @@ export default function StoryCard({ story, onBookmarkChange, onAuthRequired }) {
     );
     const [loading, setLoading] = useState(false);
 
+    // Reset bookmark UI if user logs out
+    React.useEffect(() => {
+        if (!isAuthenticated) {
+            setIsBookmarked(false);
+        } else {
+            // Re-sync with story data if they log back in
+            setIsBookmarked(story.bookmarkedBy?.length > 0 || false);
+        }
+    }, [isAuthenticated, story.bookmarkedBy]);
+
     const handleBookmark = async () => {
         // Trigger the Auth Modal in Home.jsx if user is not logged in
         if (!isAuthenticated) {
