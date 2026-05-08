@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { storiesAPI } from '../utils/api';
+import { useAuth } from '../context/authContext';
 import StoryCard from '../components/StoryCard';
 import Loading from '../components/Loading';
 
