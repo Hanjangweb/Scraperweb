@@ -44,7 +44,8 @@ exports.toggleBookmark = async (req, res) => {
     return res.status(404).json({ error: 'Story not found' });
   }
 
-  const isBookmarked = story.bookmarkedBy.includes(userId);
+  // Use some() with toString() for robust comparison of ObjectIds
+  const isBookmarked = story.bookmarkedBy.some(id => id.toString() === userId.toString());
 
   if (isBookmarked) {
     await Story.findByIdAndUpdate(
@@ -56,7 +57,7 @@ exports.toggleBookmark = async (req, res) => {
   } else {
     await Story.findByIdAndUpdate(
       storyId,
-      { $push: { bookmarkedBy: userId } },
+      { $addToSet: { bookmarkedBy: userId } }, // Use $addToSet to avoid duplicates
       { new: true }
     );
     res.status(200).json({ success: true, message: 'Bookmark added', bookmarked: true });

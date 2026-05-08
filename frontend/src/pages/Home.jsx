@@ -7,7 +7,7 @@ import Loading from '../components/Loading';
 import { RefreshCw, LayoutGrid, Bookmark, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function Home() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
 
   const [stories, setStories] = useState([]);
@@ -54,7 +54,20 @@ export default function Home() {
 
   const handleBookmarkChange = (storyId, isBookmarked) => {
     setStories(prev => 
-      prev.map(s => s._id === storyId ? { ...s, bookmarked: isBookmarked } : s)
+      prev.map(s => {
+        if (s._id === storyId) {
+          // Update the bookmarkedBy array to stay in sync with the backend
+          const currentUserId = user?.id;
+          if (!currentUserId) return s;
+
+          const newBookmarkedBy = isBookmarked
+            ? [...(s.bookmarkedBy || []), currentUserId]
+            : (s.bookmarkedBy || []).filter(id => id !== currentUserId);
+          
+          return { ...s, bookmarkedBy: newBookmarkedBy };
+        }
+        return s;
+      })
     );
   };
 

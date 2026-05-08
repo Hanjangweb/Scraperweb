@@ -4,6 +4,7 @@ import StoryCard from '../components/StoryCard';
 import Loading from '../components/Loading';
 
 export default function Bookmarks() {
+  const { user } = useAuth();
   const [bookmarks, setBookmarks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,6 +35,20 @@ export default function Bookmarks() {
   const handleBookmarkChange = (storyId, isBookmarked) => {
     if (!isBookmarked) {
       setBookmarks((prev) => prev.filter((b) => b._id !== storyId));
+    } else {
+      // In case we ever need to update the state without removing (though unlikely on this page)
+      setBookmarks(prev => 
+        prev.map(s => {
+          if (s._id === storyId) {
+            const currentUserId = user?.id;
+            const newBookmarkedBy = isBookmarked
+              ? [...(s.bookmarkedBy || []), currentUserId]
+              : (s.bookmarkedBy || []).filter(id => id !== currentUserId);
+            return { ...s, bookmarkedBy: newBookmarkedBy };
+          }
+          return s;
+        })
+      );
     }
   };
 

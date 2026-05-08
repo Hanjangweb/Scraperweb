@@ -4,21 +4,25 @@ import { storiesAPI } from '../utils/api';
 import { useAuth } from '../context/authContext';
 
 export default function StoryCard({ story, onBookmarkChange, onAuthRequired }) {
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, user } = useAuth();
     const [isBookmarked, setIsBookmarked] = useState(
-        story.bookmarkedBy?.length > 0 || false
+        isAuthenticated && user?.id && story.bookmarkedBy?.some(id => 
+            (typeof id === 'string' ? id : id._id) === user.id
+        ) || false
     );
     const [loading, setLoading] = useState(false);
 
-    // Reset bookmark UI if user logs out
+    // Reset bookmark UI if user logs out or story data changes
     React.useEffect(() => {
         if (!isAuthenticated) {
             setIsBookmarked(false);
-        } else {
-            // Re-sync with story data if they log back in
-            setIsBookmarked(story.bookmarkedBy?.length > 0 || false);
+        } else if (user?.id) {
+            const bookmarked = story.bookmarkedBy?.some(id => 
+                (typeof id === 'string' ? id : id._id) === user.id
+            ) || false;
+            setIsBookmarked(bookmarked);
         }
-    }, [isAuthenticated, story.bookmarkedBy]);
+    }, [isAuthenticated, user?.id, story.bookmarkedBy]);
 
     const handleBookmark = async () => {
         // Trigger the Auth Modal in Home.jsx if user is not logged in
