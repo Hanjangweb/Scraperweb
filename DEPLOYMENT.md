@@ -173,37 +173,13 @@ VITE_API_URL=https://your-backend-api-domain.com/api
 - Optimize database queries
 - Use CDN for static assets
 
-### Continuous Deployment with GitHub Actions
+### Continuous Deployment
 
-Automated deployment is configured using GitHub Actions. Every push to the `main` branch will trigger a deployment for both the backend (Render) and frontend (Vercel).
+1. **Setup CI/CD:**
+   - GitHub Actions for automated testing
+   - Auto-deploy on push to main branch
 
-#### Setup Instructions
-
-1.  **Backend (Render):**
-    *   Go to your Render Dashboard.
-    *   Select your Web Service.
-    *   Go to **Settings**.
-    *   Find the **Deploy Hook** section and copy the URL.
-    *   In your GitHub repository, go to **Settings > Secrets and variables > Actions**.
-    *   Create a new repository secret named `RENDER_DEPLOY_HOOK_URL` and paste the URL.
-
-2.  **Frontend (Vercel):**
-    *   **Vercel Token:** Go to your [Vercel Account Settings > Tokens](https://vercel.com/account/tokens) and create a new token.
-    *   **Project ID & Org ID:**
-        *   Install Vercel CLI locally: `npm install -g vercel`
-        *   Run `vercel link` in the `frontend` directory.
-        *   Check the `.vercel/project.json` file created to find `projectId` and `orgId`.
-    *   In your GitHub repository, go to **Settings > Secrets and variables > Actions**.
-    *   Create the following repository secrets:
-        *   `VERCEL_TOKEN`: Your Vercel personal access token.
-        *   `VERCEL_ORG_ID`: Your Vercel organization/user ID.
-        *   `VERCEL_PROJECT_ID`: Your Vercel project ID.
-
-3.  **Workflow File:**
-    *   The workflow is located at `.github/workflows/deploy.yml`.
-    *   It triggers on pushes to the `main` branch.
-
-### Example GitHub Action (Summary)
+2. **Example GitHub Action:**
    ```yaml
    name: Deploy
    on:
