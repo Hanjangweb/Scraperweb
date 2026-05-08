@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Heart, ExternalLink, User, Clock, Globe } from 'lucide-react';
 import { storiesAPI } from '../utils/api';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/authContext';
 
 export default function StoryCard({ story, onBookmarkChange, onAuthRequired }) {
     const { isAuthenticated } = useAuth();
