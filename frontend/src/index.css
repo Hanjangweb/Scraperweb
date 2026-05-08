@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@theme {
+  --color-orange-50: #fff7ed;
+  --color-orange-600: #ea580c;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
