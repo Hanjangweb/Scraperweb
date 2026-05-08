@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { authAPI } from '../utils/api';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/authContext';
 // Added Eye and EyeOff to imports
 import { Mail, Lock, User, Loader2, Eye, EyeOff } from 'lucide-react';
 

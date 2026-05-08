@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { authAPI } from '../utils/api';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/authContext';
 import { Mail, Lock, ArrowRight, Eye, EyeOff } from 'lucide-react';
 
 export default function Login() {

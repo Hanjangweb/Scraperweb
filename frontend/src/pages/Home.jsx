@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { storiesAPI } from '../utils/api';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/authContext';
 import StoryCard from '../components/StoryCard';
 import Loading from '../components/Loading';
 import { RefreshCw, LayoutGrid, Bookmark, X, ChevronLeft, ChevronRight } from 'lucide-react';
