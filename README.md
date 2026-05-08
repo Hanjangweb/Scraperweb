@@ -2,7 +2,7 @@
 
 A full-stack MERN application that scrapes top stories from Hacker News, displays them with a modern UI, and allows authenticated users to bookmark their favorite stories.
 
-## 🚀 Features
+##  Features
 
 - **Web Scraping**: Automatically scrapes top 10 stories from Hacker News on server start
 - **User Authentication**: JWT-based authentication with secure login and registration
@@ -23,7 +23,7 @@ A full-stack MERN application that scrapes top stories from Hacker News, display
   - Trigger manual scraping via API
   - RESTful API design
 
-## 📋 Tech Stack
+##  Tech Stack
 
 ### Backend
 - **Node.js** & **Express.js** - Server framework
@@ -43,7 +43,7 @@ A full-stack MERN application that scrapes top stories from Hacker News, display
 - **Lucide React** - Icons
 - **Vite** - Build tool
 
-## 📦 Installation
+##  Installation
 
 ### Prerequisites
 - Node.js (v14 or higher)
@@ -185,7 +185,7 @@ Response:
 }
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 mini-application/
@@ -241,7 +241,7 @@ mini-application/
 └── README.md                     # This file
 ```
 
-## 🔐 Authentication Flow
+##  Authentication Flow
 
 1. User registers/logs in with email and password
 2. Backend validates credentials and generates JWT token
@@ -249,7 +249,7 @@ mini-application/
 4. Token is sent with each request in Authorization header
 5. Backend verifies token before allowing protected operations
 
-## 📝 Features in Detail
+##  Features in Detail
 
 ### Scraping
 - Runs automatically on server start
@@ -269,7 +269,7 @@ mini-application/
 - Customizable via `limit` query parameter
 - Page numbering starts at 1
 
-## 🛠️ Development
+##  Development
 
 ### Running Both Servers
 In two separate terminal windows:
@@ -299,7 +299,7 @@ npm run build
 npm run preview
 ```
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### MongoDB Connection Issues
 - Verify MongoDB connection string in `.env`
@@ -320,7 +320,7 @@ npm run preview
 - Hacker News website structure may have changed
 - Verify Cheerio selectors are up to date
 
-## 📚 Additional Resources
+##  Additional Resources
 
 - [Express.js Documentation](https://expressjs.com/)
 - [MongoDB Documentation](https://docs.mongodb.com/)
@@ -328,16 +328,13 @@ npm run preview
 - [Tailwind CSS Documentation](https://tailwindcss.com/)
 - [JWT Introduction](https://jwt.io/introduction)
 
-## 📄 License
+##  License
 
 This project is open source and available under the MIT License.
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions are welcome! Feel free to submit pull requests or open issues for bugs and feature requests.
 
 ---
 
-**Created for: MERN Stack Developer Assignment**
-**Time Limit: 48 Hours**
-**Submission Format: GitHub Repository + Loom Video Walkthrough**
